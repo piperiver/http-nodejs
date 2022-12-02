@@ -3,13 +3,14 @@ dotenv.config();
 
 import express from "express";
 import mysql from "mysql2";
+import cors from "cors";
 
 const port = process.env.PORT || 3001;
 
 //Se inicializa express
 const app = express();
+app.use(cors());
 app.use(express.json());
-
 app.use(
   express.urlencoded({
     extended: true,
@@ -22,11 +23,11 @@ app.get("/", (req, res) => {
 
 // Se crea la conexion al a bdd
 export const connection = mysql.createConnection({
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
-  port: process.env.MYSQL_PORT,
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT,
 });
 
 app.get("/getData", (req, res) => {
